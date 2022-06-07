@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: kcp
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: kcp
+    app.kubernetes.io/part-of: control-plane-service
+  name: kcp
+  namespace: rhn-support-csams
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kcp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: kcp
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio/user-workload:rhn-support-csams-kcp
+        imagePullPolicy: Always
+        name: container-image
+        resources:
+          requests:
+            cpu: "1"
+            memory: 2Gi
+status: {}
